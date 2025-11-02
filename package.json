@@ -1,0 +1,41 @@
+{
+  "name": "python-binance",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "generate-docs": "node scripts/generate-docs.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:39306/git/pcriadoperez/python-binance"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^24.9.2",
+    "@types/react": "^19.2.2",
+    "autoprefixer": "^10.4.21",
+    "fumadocs-core": "^16.0.7",
+    "fumadocs-mdx": "^13.0.4",
+    "fumadocs-python": "^0.0.6",
+    "fumadocs-ui": "^16.0.7",
+    "next": "^16.0.1",
+    "postcss": "^8.5.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "rimraf": "^6.1.0",
+    "shiki": "^3.14.0",
+    "tailwindcss": "^4.1.16",
+    "typescript": "^5.9.3"
+  }
+}
