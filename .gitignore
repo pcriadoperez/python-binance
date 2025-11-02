@@ -25,3 +25,4 @@ next-env.d.ts
 # Fumadocs generated files
 binance.json
 .map.ts
+.source/

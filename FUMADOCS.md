@@ -1,5 +1,11 @@
 # Fumadocs Integration
 
+⚠️ **Status**: The Fumadocs integration is partially complete. The source configuration works, but there is a compilation hang issue when accessing pages. Further investigation needed.
+
+---
+
+
+
 This project now includes [Fumadocs](https://fumadocs.vercel.app/), a modern documentation framework that generates interactive API documentation from Python code.
 
 ## What is Fumadocs?
