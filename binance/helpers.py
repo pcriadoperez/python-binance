@@ -1,6 +1,7 @@
 import asyncio
 from decimal import Decimal
 import json
+import warnings
 from typing import Union, Optional, Dict
 
 import dateparser
@@ -88,17 +89,25 @@ def convert_list_to_json_array(l):
     return res.replace(" ", "")
 
 
-def get_loop():
+def get_loop() -> asyncio.AbstractEventLoop:
     """check if there is an event loop in the current thread, if not create one
     inspired by https://stackoverflow.com/questions/46727787/runtimeerror-there-is-no-current-event-loop-in-thread-in-async-apscheduler
     """
     try:
-        loop = asyncio.get_event_loop()
-        return loop
-    except RuntimeError as e:
-        if str(e).startswith("There is no current event loop in thread"):
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-            return loop
-        else:
-            raise
+        return asyncio.get_running_loop()
+    except RuntimeError:
+        pass
+
+    try:
+        with warnings.catch_warnings():
+            # python 3.10 - 3.13 warn when get_event_loop implicitly creates a loop
+            warnings.simplefilter("ignore", DeprecationWarning)
+            loop = asyncio.get_event_loop()
+    except RuntimeError:
+        # python 3.14+ raises instead of creating a loop
+        loop = None
+
+    if loop is None or loop.is_closed():
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    return loop

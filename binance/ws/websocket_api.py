@@ -39,7 +39,6 @@ class WebsocketAPI(ReconnectingWebsocket):
     @property
     def connection_lock(self) -> asyncio.Lock:
         if self._connection_lock is None:
-            loop = asyncio.get_event_loop()
             self._connection_lock = asyncio.Lock()
         return self._connection_lock
 

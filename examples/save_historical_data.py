@@ -19,7 +19,7 @@ def date_to_milliseconds(date_str):
     """
     # get epoch value in UTC
     assert date_str is not None
-    epoch = datetime.utcfromtimestamp(0).replace(tzinfo=pytz.utc)
+    epoch = datetime.fromtimestamp(0, tz=pytz.utc)
     # parse our date string
     d = dateparser.parse(date_str)
     assert d is not None

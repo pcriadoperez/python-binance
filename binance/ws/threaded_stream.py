@@ -1,4 +1,5 @@
 import asyncio
+import inspect
 import logging
 import threading
 from typing import Optional, Dict, Any
@@ -86,7 +87,7 @@ class ThreadedApiManager(threading.Thread):
                     }
                 if not msg:
                     continue  # Handle both async and sync callbacks
-                if asyncio.iscoroutinefunction(callback):
+                if inspect.iscoroutinefunction(callback):
                     asyncio.create_task(callback(msg))
                 else:
                     callback(msg)

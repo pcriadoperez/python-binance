@@ -1,5 +1,19 @@
 Changelog
 
+Unreleased
+^^^^^^^^^^
+
+**Added**
+
+- support for Python 3.13 and 3.14 (CI matrix, tox envlist and PyPI classifiers)
+
+**Fixed**
+
+- ``get_loop`` no longer relies on the wording of the ``RuntimeError`` raised by
+  ``asyncio.get_event_loop`` and works on Python 3.14, where that call no longer
+  creates a loop implicitly
+- use ``inspect.iscoroutinefunction`` instead of the deprecated ``asyncio.iscoroutinefunction``
+
 v1.0.37 - 2026-06-08
 ^^^^^^^^^^^^^^^^^^^^
 
