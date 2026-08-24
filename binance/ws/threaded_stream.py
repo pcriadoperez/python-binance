@@ -86,11 +86,15 @@ class ThreadedApiManager(threading.Thread):
                         "m": f"{e}",
                     }
                 if not msg:
-                    continue  # Handle both async and sync callbacks
-                if inspect.iscoroutinefunction(callback):
-                    asyncio.create_task(callback(msg))
-                else:
-                    callback(msg)
+                    continue
+                # Handle both async and sync callbacks. Dispatch on what the
+                # callback returns rather than on the callback itself: an
+                # AsyncMock is only detected by inspect.iscoroutinefunction
+                # from python 3.12 on, so inspecting the callable would treat
+                # it as sync on older versions and drop the coroutine.
+                result = callback(msg)
+                if inspect.isawaitable(result):
+                    asyncio.ensure_future(result)
         del self._socket_running[path]
 
     def run(self):
