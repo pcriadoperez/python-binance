@@ -12,7 +12,11 @@ Unreleased
 - ``get_loop`` no longer relies on the wording of the ``RuntimeError`` raised by
   ``asyncio.get_event_loop`` and works on Python 3.14, where that call no longer
   creates a loop implicitly
-- use ``inspect.iscoroutinefunction`` instead of the deprecated ``asyncio.iscoroutinefunction``
+- websocket callbacks are dispatched on the awaited result rather than on the
+  callable, dropping the deprecated ``asyncio.iscoroutinefunction`` without
+  changing how ``AsyncMock`` callbacks behave on Python 3.8-3.11
+- ``examples/binace_socket_manager.py`` uses ``asyncio.run``, as
+  ``asyncio.get_event_loop`` raises on Python 3.14
 
 v1.0.37 - 2026-06-08
 ^^^^^^^^^^^^^^^^^^^^
